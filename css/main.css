@@ -2596,32 +2596,5 @@ footer .copyright span:last-child::after {
 	background: #000000;
 }
 
-.k-svg-loader {
-  animation: rotate 1.6s linear infinite;
-}
-
-.k-svg-loader path {
-  stroke-dasharray: 260;
-  stroke-dashoffset: 260;
-  animation: draw 1.6s ease-in-out infinite;
-}
-
-@keyframes draw {
-  0% {
-    stroke-dashoffset: 260;
-  }
-  50% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: -260;
-  }
-}
-
-@keyframes rotate {
-  0% { transform: rotate(0deg);   }
-  100% { transform: rotate(360deg); }
-}
-
 
 /*# sourceMappingURL=main.css.map */
