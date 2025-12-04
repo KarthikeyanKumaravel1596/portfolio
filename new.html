@@ -1,57 +1,35 @@
-<div class="k-css-loader"></div>
+<svg class="k-svg-loader" width="120" height="120" viewBox="0 0 100 100">
+  <path id="kPath"
+        d="M20 10 L20 90 M20 50 L70 10 M20 50 L70 90"
+        fill="none" stroke="#0073ff" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
 
 <style>
-  .k-css-loader {
-  --size: 90px;
-  --thickness: 14px;
-  --color: #0073ff;
-
-  position: relative;
-  width: var(--size);
-  height: var(--size);
-  animation: spin 1.2s linear infinite;
+  .k-svg-loader {
+  animation: rotate 1.6s linear infinite;
 }
 
-.k-css-loader::before,
-.k-css-loader::after,
-.k-css-loader div {
-  content: "";
-  position: absolute;
-  background: var(--color);
-  border-radius: 10px;
+.k-svg-loader path {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: draw 1.6s ease-in-out infinite;
 }
 
-/* Vertical bar */
-.k-css-loader::before {
-  width: var(--thickness);
-  height: 100%;
-  left: 0;
-  top: 0;
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 260;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -260;
+  }
 }
 
-/* Upper diagonal */
-.k-css-loader::after {
-  width: calc(var(--size) * 0.75);
-  height: var(--thickness);
-  top: 28%;
-  left: 0;
-  transform: rotate(-40deg);
-  transform-origin: left center;
-}
-
-/* Lower diagonal (inner element) */
-.k-css-loader div {
-  width: calc(var(--size) * 0.75);
-  height: var(--thickness);
-  top: 60%;
-  left: 0;
-  transform: rotate(40deg);
-  transform-origin: left center;
-}
-
-@keyframes spin {
-  0%   { transform: rotate(0deg); }
+@keyframes rotate {
+  0% { transform: rotate(0deg);   }
   100% { transform: rotate(360deg); }
 }
-
 </style>
