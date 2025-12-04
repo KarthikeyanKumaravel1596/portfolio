@@ -1094,13 +1094,13 @@ header .row {
 	min-height: 66px;
 }
 header .top-bar {
-	display: block;
-	background: #000000;
-	min-width: 220px;
-	min-height: 66px;
-	position: absolute;
-	left: 90px;
-	top: 0;
+    display: block;
+    background: #ff0077;
+    min-width: 0px;
+    min-height: 4px;
+    left: 90px;
+    top: 0;
+    position: relative;
 }
 header .logo {
 	float: left;
@@ -2598,3 +2598,4 @@ footer .copyright span:last-child::after {
 
 
 /*# sourceMappingURL=main.css.map */
+
