@@ -1,136 +1,57 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>"K" CSS Loader</title>
+<div class="k-css-loader"></div>
+
 <style>
-  :root{
-    --size: 96px;            /* overall size of the K */
-    --thickness: calc(var(--size) * 0.18); /* stroke thickness */
-    --color: #0b67ff;       /* accent color */
-    --duration: 1.2s;       /* animation duration */
-  }
+  .k-css-loader {
+  --size: 90px;
+  --thickness: 14px;
+  --color: #0073ff;
 
-  /* Basic page centering for demo */
-  html,body{
-    height:100%;
-    margin:0;
-  }
-  .wrap{
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#f6f7fb;
-  }
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  animation: spin 1.2s linear infinite;
+}
 
-  /* Loader container */
-  .k-loader{
-    width:var(--size);
-    height:var(--size);
-    position:relative;
-    display:inline-block;
-    transform-origin:center center;
-    /* overall loader rotation */
-    animation: loader-rotate var(--duration) linear infinite;
-  }
+.k-css-loader::before,
+.k-css-loader::after,
+.k-css-loader div {
+  content: "";
+  position: absolute;
+  background: var(--color);
+  border-radius: 10px;
+}
 
-  /* Vertical stroke of K */
-  .k-loader .bar{
-    position:absolute;
-    left:0;
-    top:0;
-    width:var(--thickness);
-    height:100%;
-    background:var(--color);
-    border-radius:calc(var(--thickness) / 2);
-    transform-origin:left center;
-    /* subtle pulse */
-    animation: bar-pulse var(--duration) ease-in-out infinite;
-  }
+/* Vertical bar */
+.k-css-loader::before {
+  width: var(--thickness);
+  height: 100%;
+  left: 0;
+  top: 0;
+}
 
-  /* Upper diagonal */
-  .k-loader .diag-upper,
-  .k-loader .diag-lower{
-    position:absolute;
-    right:0;
-    width:calc(var(--size) * 0.55); /* diagonal length (approx) */
-    height:var(--thickness);
-    background:var(--color);
-    border-radius:calc(var(--thickness) / 2);
-    top:50%;
-    transform-origin:left center;
-    animation: diag-swing var(--duration) ease-in-out infinite;
-    will-change: transform;
-  }
+/* Upper diagonal */
+.k-css-loader::after {
+  width: calc(var(--size) * 0.75);
+  height: var(--thickness);
+  top: 28%;
+  left: 0;
+  transform: rotate(-40deg);
+  transform-origin: left center;
+}
 
-  /* Position upper diagonal above center and rotated up */
-  .k-loader .diag-upper{
-    transform: translateY(calc(-0.5 * var(--thickness))) rotate(-40deg);
-    top:32%;
-    animation-delay: calc(var(--duration) * -0.05);
-  }
+/* Lower diagonal (inner element) */
+.k-css-loader div {
+  width: calc(var(--size) * 0.75);
+  height: var(--thickness);
+  top: 60%;
+  left: 0;
+  transform: rotate(40deg);
+  transform-origin: left center;
+}
 
-  /* Position lower diagonal below center and rotated down */
-  .k-loader .diag-lower{
-    transform: translateY(calc(-0.5 * var(--thickness))) rotate(40deg);
-    top:68%;
-    animation-delay: calc(var(--duration) * 0.05);
-  }
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-  /* small face animation offset to feel organic */
-  @keyframes loader-rotate{
-    0%   { transform: rotate(0deg) scale(1); }
-    50%  { transform: rotate(18deg) scale(1.06); }
-    100% { transform: rotate(360deg) scale(1); }
-  }
-
-  @keyframes bar-pulse{
-    0%   { transform: scaleY(1); opacity:1; }
-    50%  { transform: scaleY(0.92); opacity:0.9; }
-    100% { transform: scaleY(1); opacity:1; }
-  }
-
-  @keyframes diag-swing{
-    0%   { transform: translateY(calc(-0.5 * var(--thickness))) rotate(var(--r)); }
-    25%  { transform: translateY(calc(-0.5 * var(--thickness))) rotate(calc(var(--r) * 0.6)); }
-    50%  { transform: translateY(calc(-0.5 * var(--thickness))) rotate(calc(var(--r) * -0.12)); }
-    75%  { transform: translateY(calc(-0.5 * var(--thickness))) rotate(calc(var(--r) * 0.6)); }
-    100% { transform: translateY(calc(-0.5 * var(--thickness))) rotate(var(--r)); }
-  }
-
-  /* Use CSS variables to control base rotation for each diagonal */
-  .k-loader .diag-upper { --r: -40deg; }
-  .k-loader .diag-lower { --r:  40deg; }
-
-  /* Accessibility: visually-hidden text for screen readers */
-  .sr-only{
-    position:absolute !important;
-    width:1px;
-    height:1px;
-    padding:0;
-    margin:-1px;
-    overflow:hidden;
-    clip:rect(0 0 0 0);
-    white-space:nowrap;
-    border:0;
-  }
-
-  /* Responsive example: reduce size on narrow screens */
-  @media (max-width:420px){
-    :root{ --size: 64px; }
-  }
 </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="k-loader" role="img" aria-label="Loading">
-      <div class="bar" aria-hidden="true"></div>
-      <div class="diag-upper" aria-hidden="true"></div>
-      <div class="diag-lower" aria-hidden="true"></div>
-      <span class="sr-only">Loading</span>
-    </div>
-  </div>
-</body>
-</html>
